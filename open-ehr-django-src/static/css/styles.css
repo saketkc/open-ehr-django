@@ -1,0 +1,408 @@
+/* CSS Resets */
+
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,address,cite,code,del,dfn,em,img,ins,q,small,strong,sub,sup,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{border:0;margin:0;padding:0}article,aside,figure,figure img,figcaption,hgroup,footer,header,nav,section,video,object{display:block}a img{border:0}figure{position:relative}figure img{width:100%}
+
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+body{
+	font-family:arial,sans-serif;	
+	color:#333;
+	font-size:15px;
+	scroll:overflow;	
+}
+
+.container1{
+padding:0 20px;
+}
+
+/* ROW STYLES */
+
+.row2{
+	margin:auto;
+	margin-top:20px;
+	height:50px;
+	max-width:980px;
+	min-width:727px;
+}
+
+.row1{
+	width:100%;
+	margin:auto;
+	margin-top:20px;
+	max-width:980px;
+	min-width:727px;
+	min-height:450px;
+	overflow:auto;
+}
+
+.row3{
+	margin:auto;
+	margin-top:10px;
+	max-width:980px;
+	min-width:727px;
+}
+
+/* INFO DIV STYLES */
+#info{
+	float:left;
+	width:50%;
+}
+
+p.welcometext{
+	margin-bottom:20px;
+	font-size:20px;
+	font-weight:bold;
+}
+
+#info ul{
+	padding-left:20px;
+}
+
+#info li{
+	font-size:15px;
+	list-style:none;
+	margin-bottom:18px;
+}
+
+p.signup-start{
+margin-bottom:10px;
+}
+
+#info ul li.signuptext{
+margin-left:25px;
+list-style:decimal;
+}
+
+img.iconimg{
+	width:30px;
+	height:30px;
+	margin-right:15px;
+	float:left;
+}
+
+p.centeredtext{
+	font-size:16px;
+	margin-top:30px;
+	text-align:center;
+	margin-left:-60px;
+}
+
+/* TABS DIV STYLES */
+#tabs{
+	width:40%;
+	float:right;
+	height:auto;
+	min-height:450px;
+}
+
+p.errormessages{
+	font-size:13px;
+	margin-left: 180px;
+    margin-right: 50px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+p.error{
+	background:#FFBABA;
+	color:#D8000C;
+	padding-left:30px;
+	padding-right:30px;
+	border:1px solid #D8000C;
+}
+
+p.success{
+	color:#fff;
+	background:#2c6ec6;
+	padding-left:10px;
+	padding-right:10px;
+	border:1px solid #444;
+}
+
+.ultabs {
+	background:#fff;
+	list-style:none; 
+	margin:0 !important; 
+	padding:0;
+	height:25px;
+	border-bottom:1px solid #2c6dc6;	
+}
+
+/* single tab */
+.ultabs li { 
+	float:left;	 
+	text-indent:0;
+	padding:0;
+	margin:0 !important;
+	list-style-image:none !important; 
+}
+
+.ultabs li.doctor-tabs{ 
+	text-indent:0;
+	padding:0;
+	margin:0 !important;
+	list-style-image:none !important; 
+}
+
+/* link inside the tab. uses a background image */
+.ultabs li a { 
+	font-size:16px;
+	background:#e0edf8;	
+	display:block;
+	height: 25px;  
+	line-height:25px;
+	width: 111px;
+	text-align:center;	
+	text-decoration:none;
+	color:#333;
+	padding:0px;
+	margin:0px;	
+	position:relative;
+	top:0px;
+	border-bottom:1px solid #2c6dc6;	
+	border-right:2px solid #fff;
+}
+
+.ultabs li:active a {
+	background:#2c6dc6;	
+	outline:none;		
+}
+
+/* when mouse enters the tab move the background image */
+.ultabs a:hover {
+	background-position: -652px -31px;	
+	color:#fff;
+	background:#2c6dc6;	
+}
+
+/* active tab uses a class name "current". it's highlight is also done by moving the background image. */
+.ultabs .current, .ultabs .current:hover, .ultabs li.current a {
+	background-position: -652px -62px;
+	background:#2c6dc6;	
+	cursor:default !important; 
+	color:#FFF !important;
+}
+
+#tab-1 {
+	background:#e0edf8;	
+	height:auto;
+	padding-bottom:25px;
+	font-size:14px;
+}
+
+#tab-2 {
+	background:#e0edf8;	
+	height:auto;
+	padding-bottom:25px;
+	font-size:14px;
+}
+
+/* FORM STYLES */
+#id_username, #id_password, #id_password_confirm, #id_email, #id_first_name{
+	margin-top:10px;
+	width:190px;
+	height:27px;
+	border:1px solid #888888;
+	
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top, #eeeeee 0%, #ffffff); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #eeeeee 0%,#fffffff 100%); /* IE10+ */
+	background: linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */	
+}
+
+#id_patient_first_name, #id_patient_last_name, #id_patient_mobile, #id_patient_email, #id_gender, #id_patient_dob, #id_report_due_on, #id_reference_doctor_name, #id_sample_id, #id_tests_list-1, #id_tests_list-2, #id_tests_list-2, #id_mobile_no, #id_date_of_birth, #id_pin, #id_dateofbirth, #id_last_name{
+	margin-top:10px;
+	width:190px;
+	height:27px;
+	border:1px solid #888888;
+		
+	background: #eeeeee; /* Old browsers */
+	background: -moz-linear-gradient(top, #eeeeee 0%, #ffffff); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #eeeeee 0%,#fffffff 100%); /* IE10+ */
+	background: linear-gradient(top, #eeeeee 0%,#ffffff 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+
+	}
+
+
+label{
+	float:left;
+	width:130px;
+	text-align:right;
+	margin-right:12px;
+	margin-top:7px;
+	padding-top:10px;
+}
+
+span.label_tag label{
+	float:left;
+	width:130px;
+	text-align:right;
+	margin-right:12px;
+	margin-top:10px;
+	padding-top:10px;
+}
+
+input{
+	border:0px;
+	padding-left:7px;
+}
+
+input:focus{
+	border-style:solid;
+	border-color:#245899;	
+	border-width:1px;
+}
+
+input#lab_login_submit{
+	height:30px;
+	width:90px;
+	font-size:14px;
+	position:relative;
+	left:250px;
+	top:15px;
+	padding-bottom:2px;
+}
+
+input#lab_registration_submit{
+	height:30px;
+	width:90px;
+	font-size:14px;
+	position:relative;
+	left:250px;
+	top:15px;
+	padding-bottom:2px;
+}
+
+p#agree-to-terms{
+	margin-left:40px;
+	margin-top:30px;
+	margin-right:30px;
+}
+
+p#agree-to-terms #agree-checkbox{
+	float:left;
+	margin-right:7px;
+	margin-bottom:10px;
+}
+
+
+p#pwdlinks{
+	text-align:right;
+	font-size:13px;
+	color:#245899;
+	margin-top:20px;
+	margin-right:50px;
+	margin-bottom:15px;
+}
+
+p#pwdlinks a:link{
+color:#245899;
+text-decoration:none;
+}
+
+p#pwdlinks a:visited{
+color:#245899;
+}
+
+p#pwdlinks a:active{
+color:#245899;
+}
+
+p#pwdlinks a:hover{
+color:#245899;
+text-decoration:underline;
+}
+
+input[type = "submit"]:hover{
+	background:#2c6dc6;
+	color:#fff;
+}
+
+/* FOOTER STYLES */
+.footerwrap{
+	border-top:1px solid #AAAAAA;
+	padding-top:10px;
+}
+
+#info1{
+	float:left;
+	width:20%;
+}
+
+#footer-row{
+	border-top:1px solid #AAA;
+	position:relative;
+	bottom:0px;
+	padding-top:10px;
+	font-size:13px;
+}
+
+.footertext{
+	font-size:13px;
+}
+
+.footerwrap ul{
+	font-size:13px;
+	margin-left:59%;
+}
+
+.footerwrap ul li{
+	display:inline;
+	margin-right:10px;
+}
+
+.footerwrap ul li a:link{
+	color:#245899;
+	text-decoration:none;
+}
+
+.footerwrap ul li a:visited{
+	color:#245899;
+	text-decoration:none;
+}
+
+.footerwrap ul li a:active{
+	color:#000;
+	text-decoration:none;
+}
+
+.footerwrap ul li a:hover{
+	color:#245899;
+	text-decoration:underline;
+}
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		
+	}
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}

@@ -1,0 +1,120 @@
+from django import forms
+#from django.forms.widgets import Input
+
+
+#class NumberInput(Input):
+    #"""HTML5 Number Input."""
+    #input_type = 'number'
+
+
+#class SearchInput(Input):
+    #"""HTML5 Search Input."""
+    #input_type = 'search'
+
+
+#class EmailInput(Input):
+    #"""HTML5 Email Input."""
+    #input_type = 'email'
+    #def render(self, name, value, attrs=None): 
+        #if attrs is None: 
+            #attrs = {} 
+        #attrs.update(dict(autocorrect='off', 
+                          #autocapitalize='off', 
+                          #spellcheck='false')) 
+        #return super(EmailInput, self).render(name, value, attrs=attrs)
+
+
+#class URLInput(Input):
+    #"""HTML5 URL Input."""
+    #input_type = 'url'
+
+
+#class RangeInput(Input):
+    #"""HTML5 Range Input."""
+    #input_type = 'range'
+
+
+#class PhoneInput(Input):
+    #"""HTML5 Range Input."""
+    #input_type = 'tel'
+
+"""
+HTML5 input widgets.
+TODO: Date widgets
+"""
+from django.forms.widgets import Input
+
+class HTML5Input(Input):
+    use_autofocus_fallback = False
+    
+    def render(self, *args, **kwargs):
+        rendered_string = super(HTML5Input, self).render(*args, **kwargs)
+        # js only works when an id is set
+        if self.use_autofocus_fallback and kwargs.has_key('attrs') and kwargs['attrs'].get("id",False) and kwargs['attrs'].has_key("autofocus"):
+            rendered_string += """<script>
+if (!("autofocus" in document.createElement("input"))) {
+  document.getElementById("%s").focus();
+}
+</script>""" % kwargs['attrs']['id']
+        return rendered_string
+
+class TextInput(HTML5Input):
+    input_type = 'text'
+
+class EmailInput(HTML5Input):
+    input_type = 'email'
+    def render(self, name, value, attrs=None): 
+        if attrs is None: 
+            attrs = {} 
+        attrs.update(dict(autocorrect='off', 
+                          autocapitalize='off', 
+                          spellcheck='false')) 
+        return super(EmailInput, self).render(name, value, attrs=attrs)
+
+class TelephoneInput(HTML5Input):
+    input_type = 'tel'
+    
+
+class URLInput(HTML5Input):
+    input_type = 'url'
+
+class SearchInput(HTML5Input):
+    input_type = 'search'
+
+class ColorInput(HTML5Input):
+    """
+    Not supported by any browsers at this time (Jan. 2010).
+    """
+    input_type = 'color'
+    
+class NumberInput(HTML5Input):
+    input_type = 'number'
+    
+class RangeInput(NumberInput):
+    input_type = 'range'
+    
+class DateInput(HTML5Input):
+    input_type = 'date'
+    
+class MonthInput(HTML5Input):
+    input_type = 'month'
+
+class WeekInput(HTML5Input):
+    input_type = 'week'
+
+class TimeInput(HTML5Input):
+    input_type = 'time'
+
+class DateTimeInput(HTML5Input):
+    input_type = 'datetime'
+
+class DateTimeLocalInput(HTML5Input):
+    input_type = 'datetime-local'
+class RegistrationForm(forms.Form):
+	first_name = forms.CharField(required=True,widget=TextInput({ "placeholder": "First Name" }),max_length=10)
+	last_name = forms.CharField(required=True,widget=TextInput({ "placeholder": "Last Name" }),max_length=20)
+	email = forms.EmailField(required=True,widget=EmailInput({ "required":"","placeholder": "user@example.com", "pattern":"^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$" }),max_length=40)
+	dob = forms.CharField(required=True,widget=DateInput({ "required":"","placeholder": "Last Name" }))
+    #email_verified_status=forms.CharField(required=False)
+	#email_verification_token=forms.CharField(required=False)
+

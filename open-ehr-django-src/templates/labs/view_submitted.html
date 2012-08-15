@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %} SalusHx | Confirm Results  {% endblock %}
+{% block extra_head %}
+	<link rel="stylesheet" href="/static/css/view_submitted.css">
+   <link rel="stylesheet" href="/static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+
+{% block container %}
+<div class="container1" style = "margin-top:30px;">  
+    {% if messages %}
+	<div class="errormessages">
+	    {% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</div>
+    {% endif %}
+    
+    <div class="row3" id = "topheader">
+		<img src = "/static/images/logo.gif" id = "logo" />
+		<div class = "headerlinks"> <!-- HEADERLINKS DIV ADDED -->
+			<div id = "toplinks">
+				Welcome, <a href = "#">{{user.first_name}} {{user.last_name}}</a> | <a href = "#">Settings</a> | <a href = "#">Help</a> | <a href = "/logout">Logout</a>
+			</div>
+			
+		</div> <!--HEADERLINKS DIV ENDS -->
+    </div>  <!--ROW 1 ENDS -->
+    
+	<div class = "row1">
+		<div id="test_results_view">
+			<div class = "patient_info">
+				<p id = "patient_info_head">Patient Info</p>
+				<table class = "patient_info_table">
+					<tr class = "patient_info_field">
+						<td class = "info_field">First Name:</td><td class = "info_value">{{patient_info.patient_first_name}}</td>
+						<td class = "info_field">Last Name:</td><td class = "info_value">{{patient_info.patient_last_name}}</td>
+					</tr>
+					
+					<tr class = "patient_info_field">	
+						<td class = "info_field">Mobile No.:</td><td class = "info_value">{{patient_info.patient_mobile}}</td>
+						<td class = "info_field">Date of Birth:</td><td class = "info_value">{{patient_info.patient_dob}}</td>
+					</tr>
+				</table>
+					{% for pat in patient_info.user_set.all %}
+						{{ pat.first_name }}
+					{% endfor %}
+			</div>
+    
+			<div id = "patient_form">
+				<p id = "patient_form_head">{{report_name}}</p>
+    
+					{% if rangelen %}
+						<table class = "patient_info_table">
+							{% for  datum,test in  all_data.items %}					
+								<tr class = "patient_info_field">
+									<td class = "result_field">{{ test.0 }}</td>
+									<td class = "result_value">{{ test.1 }}</td>
+								</tr>
+							{% endfor %}
+						</table>
+	
+					<form method ="POST" action = "/labs/reports/confirm_submitted_report/">
+						<input type = "hidden" value = {{report_id}} name = "report_id">
+						<input type = "hidden" value = {{test_id}} name = "test_id">
+						<input type = "submit"  name="confirm" value = "Confirm" id = "lab_registration_submit">
+						<input type = "submit" name="reject" value="Reject" id = "lab_registration_submit">
+					</form>
+
+					{% else %}
+						No Pending Reports
+					{% endif %}
+			</div> <!-- PATIENT FORM CLOSES -->
+		</div><!-- TESTS_RESULTS_VIEW CLOSES -->
+	</div>	<!-- ROW1 CLOSES -->
+	
+	<div class = "row2">
+		<div class = "footerwrap">
+			<div id = "info1" class = "footertext">
+				<p class = "copyright">SalusHx &copy; 2011</p>
+			</div>	<!-- DIV INFO1 ENDS -->
+		
+	  
+			<div id = "footerlinks">
+				<ul>
+					<li><a href = "#">About</a></li>
+					<li><a href = "#">Contact</a></li>
+					<li><a href = "#">Privacy Policy</a></li>
+					<li><a href = "#">Terms of Use</a></li>
+					<li><a href = "#">Careers</a></li>
+					<li><a href = "#">Help</a></li>
+				</ul>
+			</div>
+		</div>	
+			
+	</div><!-- DIV ROW2 ENDS --> 	
+</div> <!-- DIV CONTAINER1 ENDS -->
+{% endblock %}

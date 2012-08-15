@@ -1,0 +1,38 @@
+<style type="text/css">
+			body 
+			{
+			  background-color:#FFFFFF;
+			  margin:0;
+			  padding:0;
+			  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+			}
+			
+			ul.errorlist {
+			  margin: 0;
+			  padding: 0;
+			}
+			.errorlist li 
+			{
+			  background-color: red;
+			  color: white;
+			  display: block;
+			  width :110px;
+			  font-size: 10px;
+			  margin: 0 0 3px;
+			  padding: 4px 5px;
+		    } 
+		    #center 
+		    {
+				margin-top:150px;
+			    font-size:40pt;
+				color:#36C;
+				font-weight:bold;
+			}	
+
+			#tag 
+			{
+			  margin-left:150px;
+              font-size:14px;
+              color: #900;
+		    }
+	</style>

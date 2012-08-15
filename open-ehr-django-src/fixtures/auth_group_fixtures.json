@@ -1,0 +1,69 @@
+[
+   {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "open-ehr_super_users"
+      
+    }
+  },
+  
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "lab_super_users"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "lab_doctors"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+      "name": "lab_technicians"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 5,
+    "fields": {
+      "name": "lab_receptionists"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 6,
+    "fields": {
+      "name": "lab_patients_unregistered"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 7,
+    "fields": {
+      "name": "lab_patients_registered"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 8,
+    "fields": {
+      "name": "outside_doctors"
+      
+    }
+  }
+
+  
+]

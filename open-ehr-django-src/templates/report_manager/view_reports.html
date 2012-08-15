@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %} SalusHx|All Reports{% endblock %}
+{% block extra_head %}
+   <link rel="stylesheet" href="static/css/style.css">
+   <link rel="stylesheet" href="static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+
+<script>
+	$(document).ready((function() {
+		
+		$("#tabs").tabs();
+		
+		$("#generate_form").click(function(){
+		    var report_id= $("#id_report_name").val();
+		    
+		    url = "/render_testelement_categories_form" + "/"+String(report_id)
+		    
+		    $.ajax({
+				type: "GET",
+				url: url,
+				success: function(data){
+				    alert(data);
+				//$("#results").html(data);
+				}
+			    });
+		  });  
+
+	}));
+	</script>
+{% endblock %}
+
+{% block container %}
+<div id="content">
+    
+    <div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
+	<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">Viewl All Reports</a></li>
+		<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-2">Create New Report</a></li>		
+	</ul>
+	<div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide"  id="tabs-1">
+	    <div id="all_reports">
+		
+		{{user.username}}
+		<form method="GET" action="/render_testelement_categories_form/">
+		<div id ="report">
+		    
+		{{report_choice_form.as_p}}
+		<input type="submit" value="Generate Form" id="generate__tform">
+		</form>
+		
+		</div>
+		<div id ="results">
+		    {{result_form.as_p}}
+		</div>
+	    </div>
+	</div>
+
+	<div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="tabs-2">
+		<div id="new_report_type_form">
+		    <form method="POST" action="/add_new_report_type/" name="login_form">
+			    {% for field in new_report_type_form %}
+			     
+				<div id = "errors">
+					{{ field.errors }}							
+				</div>
+				<div id="report_labels">
+					{{ field.label_tag }}
+				</div>
+				<div id="report_fields">
+					{{ field }}
+				</div>
+				{% endfor %}
+			    <input type="submit" id="lab_login_submit" value="Submit">
+		    </form>
+		</div>
+    </div>  
+</div>
+{% endblock %}
+

@@ -1,0 +1,21 @@
+for category_id,status in status_from_doctor.iteritems():
+
+            if status=="verified" or status == "submitted" :
+                results = eval(report.results_field)[test_id]
+                #print results
+                
+                for key,value in results.iteritems():
+                    
+                    accepted_reports[i] = [i%2,report.report_due_on,str(ReportElementTests.objects.get(pk=key).test_name),report.id,str(report.belongs_to_lab)]
+                    i=i+i
+
+
+        for test_id,status in status_from_technician.iteritems():
+            
+            if status=="pending":
+                results = eval(report.results_field)[test_id]
+                for key,value in results.iteritems():
+                    pending_reports[i] = [j%2,report.report_due_on,str(ReportElementTests.objects.get(pk=key).test_name),report.id,str(report.belongs_to_lab)]
+                    j=j+i
+
+                

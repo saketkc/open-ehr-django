@@ -1,0 +1,109 @@
+{% load media %}<!doctype html>
+{# paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ #}
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+{% block head %}
+<head>
+  <meta charset="utf-8">
+
+  {# Always force latest IE rendering engine (even in intranet) & Chrome Frame #}
+  {# Remove this if you use the .htaccess #}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>{% block title %}Name your pages!{% endblock %}</title>
+  {% block metadata %}
+  <meta name="description" content="{% block meta-description %}{% endblock %}">
+  <meta name="author" content="{% block author %}{% endblock %}">
+  {% endblock %}
+
+  {# Mobile viewport optimized: j.mp/bplateviewport #}
+  {% block mobile_viewport_optimization %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% endblock %}
+
+  {% block favicons %}
+  {# Place favicon.ico and apple-touch-icon.png in the media/images directory: #}
+  {# mathiasbynens.be/notes/touch-icons #}
+  {# For iPhone 4 with high-resolution Retina display: #}
+  <link rel="shortcut icon" href="/static/images/favicon.ico" >
+  {% endblock %}
+
+  {% block css %}
+  {# CSS: implied media="all" #}
+  {% endblock %}
+  {% block extra_css %}{% endblock %}
+  {% block logo %}{% endblock %}
+
+  {# More ideas for your <head> here: h5bp.com/docs/#head-Tips #}
+
+  {% block head_js %}
+  {% comment %}
+  All JavaScript at the bottom, except for Modernizr and Respond.
+  Modernizr enables HTML5 elements & feature detects; Respond is a polyfill for min/max-width CSS3 Media Queries
+  For optimal performance, use a custom Modernizr build:
+  www.modernizr.com/download/
+  {% endcomment %}
+  {# modernizr and respond are also only loaded in the head for IE, else they are included in main.js at the end #}
+  <!--[if lt IE 8]>{% include_media 'head-ie.js' %}<![endif]-->
+  {% endblock %}
+  {% block extra_head %}{% endblock %}
+</head>
+{% endblock %}
+
+{% block body %}
+<body>
+
+  {% block container %}
+  <div id="container">
+    {% block header %}
+    <header>
+
+    </header>
+    {% endblock %}
+
+    {% block navigation %}
+    <nav>
+
+    </nav>
+    {% endblock %}
+
+    <div id="main" role="main">
+    {% block content %}
+    {% endblock %}
+    </div>
+
+    {% block footer %}
+    <footer>
+
+    </footer>
+    {% endblock %}
+  </div> {# end of #container #}
+  {% endblock %}
+
+
+  {% block js %}
+  {# JavaScript at the bottom for fast page loading #}
+  {# Javascript files are all concatenacted and compressed #}
+  {# to update for production use python manage generatemedia #}
+  <!--[if lt IE 8]>{% include_media 'main-ie.js' %}<![endif]-->
+  <!--[if (!IE)|(gte IE 8)]><!--> {% include_media 'main.js' %} <!--<![endif]-->
+  {% endblock %}
+  {% block extra_js %}{% endblock %} 
+
+  {% block google_analytics %}
+  {% if not request.user.is_superuser %}
+  {# mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID #}
+  <script>
+    var _gaq=[['_setAccount','{% block analytics_id %}UA-28885420-1{% endblock %}'],['_trackPageview'],['_trackPageLoadTime']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+  {% endif %}
+  {% endblock %}
+
+</body>
+{% endblock %}
+</html>

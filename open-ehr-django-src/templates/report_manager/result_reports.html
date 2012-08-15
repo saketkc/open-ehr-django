@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} SalusHx| Results{% endblock %}
+{% block extra_head %}
+   <link rel="stylesheet" href="static/css/style.css">
+   <link rel="stylesheet" href="static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+{% block container %}
+<div id ="content">
+<form method="POST" action="render_testelement_categories_form">
+{{results_form.as_p}}
+<input type="submit" value="Save">
+</form>
+</div>
+{% endblock %}

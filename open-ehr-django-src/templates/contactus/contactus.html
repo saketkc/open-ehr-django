@@ -1,0 +1,139 @@
+<!-- changes made are as follows
+1. changed size of twitter
+2. changed length of the hr
+3. changed the text that comes in the tab
+4.added margin to the top
+and some font sizes etc
+ -->
+<!doctype html>
+<html>
+<head>
+<link rel="shortcut icon" href="static/images/favicon.ico"/>
+<style>
+	body 
+	{
+	  margin:0;
+	  padding:0;
+	  font-family:'Amethysta',serif;
+	}
+	
+	ul.errorlist {
+	  margin: 0;
+	  padding: 0;
+	}
+	.errorlist li 
+	{
+	  background-color: red;
+	  color: white;
+	  display: block;
+	  width :110px;
+	  font-size: 10px;
+	  margin: 0 0 3px;
+	  padding: 4px 5px;
+    } 
+    #center 
+    {
+		margin-top:150px;
+	    font-size:40pt;
+		color:#36C;
+		font-weight:bold;
+	}	
+
+	#tag 
+	{
+	  margin-left:150px;
+font-size:14px;
+color: #900;
+    }
+#intro-text{
+font-size:16px;
+}
+input#newemail
+{
+width:400px;
+}
+p.alltext
+{
+font-size:14px;
+}
+
+</style>
+<link href='http://fonts.googleapis.com/css?family=Amethysta' rel=stylesheet type='text/css'/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28885420-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script>
+	$(document).ready(function(){
+		var csrf='';//$('#csrfmiddlewaretoken').val();
+
+	$("#inform").click(function(){
+			var useremail=$("#newemail").val();
+			$.post('/',{"email": useremail,'csrfmiddlewaretoken': csrf },function(data){
+				var type_msg= data; //"";
+				if(type_msg=="success")
+				{
+					
+					$("#field").slideUp(100,function(){});
+
+				}
+				//else
+			       {
+					if (type_msg=="success" )
+					{
+						$("#message").css({'visibility': 'visible','color' :'green'});
+				    $("#message").html("Thanks ! We Will get back to you shortly!").slideDown(1000,function(){});
+				    }
+				    else if(type_msg=="error")
+				    {
+					    $("#message").css({'visibility':'visible','color' : 'red'});
+					  $("#message").show().html("Sorry, but that looks like an incorrect Email address").slideDown(1000,function(){});
+
+				    }
+			    }
+			  });
+			return false;
+		});
+	});
+</script>
+<title>open-ehrHx | simplifying your health records </title>
+</head>
+<body>
+<center>
+<img src="http://open-ehrhx.com/static/images/logo.gif" width=250 style = "margin-top:50px;"/>
+<p id=intro-text>electronic health records. patient management system. healthcloud.
+<br/>
+one system. billion people. better health care.</p>
+<hr width="35%"/>
+<h3 style = "margin-top:40px">Launching soon.</h3>
+<p class = "alltext" style = "margin-top:-15px;">
+Please leave your email address and we will inform you when we launch. </p>
+<!--<form action="/" method="post">-->
+<div id=field>
+<input type=text id=newemail placeholder = "Email" style="font-family:'Amethysta';">
+<br/>
+<input type=button value="Keep me informed" id=inform>
+</div>
+<div id=message style="visibility:hidden;"></div>
+<!-- </form>-->
+<br/><br />
+<p class = "alltext" style = "font-size:13px;">You can also follow us on:</p>
+<a href="https://twitter.com/open-ehrhx" target=_blank><img src="/static/images/twitter.gif" alt=twitter width=160px></a>
+<br />
+<br />
+<br />
+<p class="alltext" style = "font-size:12px;color:#666;">Copyright &copy; 2011 open-ehrHx. All rights reserved.</p>
+
+</center>
+</body>
+</html>

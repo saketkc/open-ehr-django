@@ -1,0 +1,242 @@
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+
+body{
+font-family:arial,sans-serif;	
+color:#333;
+}
+
+/* #topheader{
+z-index:-1;
+}
+*/
+
+ul.tabs{
+position:relative;
+top:20px;
+}
+
+ul.tabs li.doctor-tabs{
+background:#EEE;
+}
+
+ul li.last-tab{
+}
+
+p.textrows{
+margin-bottom:25px;
+font-size:14px;
+
+}
+
+img.iconimg{
+width:30px;
+height:30px;
+margin-right:15px;
+float:left;
+}
+
+p.centeredtext{
+margin-top:30px;
+text-align:center;
+}
+
+.centertext{
+	margin-left:-60px;
+}
+
+#id_username, #id_password, #id_password_confirm, #id_email, #id_first_name{
+margin-top:0.5em;
+width:50%;
+height:27px;
+}
+
+#id_patient_first_name, #id_patient_last_name, #id_patient_mobile, #id_patient_email, #id_gender, #id_patient_dob, #id_report_due_on, #id_reference_doctor_name, #id_sample_id, #id_tests_list-1, #id_tests_list-2, #id_tests_list-2,  #id_tests_list-3,  #id_tests_list-4,  #id_tests_list-5{
+margin-top:0.3em;
+width:40%;
+height:27px;
+}
+
+label{
+float:left;
+width:35%;
+text-align:right;
+margin-right:0.4em;
+margin-top:0.2em;
+padding-top:0.4em;
+}
+
+input{
+border:0px;
+padding-left:0.1em;
+}
+
+input:focus{
+border-style:solid;
+border-color:#245899;	
+border-width:1px;
+}
+
+p#pwdlinks{
+text-align:right;
+font-size:13px;
+color:#245899;
+margin-top:1.2em;
+margin-right:5.5em;
+margin-bottom:1.5em;
+}
+
+input#lab_registration_submit{
+height:2.3em;
+width:7.5em;
+font-size:14px;
+position:relative;
+left:59%;
+top:0.5em;
+padding-bottom:2px;
+}
+
+span#footerlinks ul{
+text-align:right;
+}
+
+span#footerlinks ul li{
+display:inline;
+margin-left:0.4em;
+}
+
+span#footerlinks ul li a:link{
+text-decoration:none;
+color:#245899;
+}
+
+span#footerlinks ul li a:visited{
+color:#000;
+}
+
+span#footerlinks ul li a:hover{
+text-decoration:underline;
+}
+
+#report-fields{
+height:20px;
+margin-bottom:15px;
+}
+
+.report-field{
+float:left;
+width:10em;
+}
+
+.field-first{
+clear:left;
+width:15px;
+margin-right:15px;
+}
+
+.a-1{
+background:#e0fff8;
+height:4em;
+margin-bottom:2px;
+border:2px solid #000;
+padding-top:4px;
+}
+
+.a-0{
+background:#efefef;
+height:4em;
+margin-bottom:2px;
+border:2px solid #000;
+}
+
+.searchbox{
+border:1px solid #000;
+height:24px;
+width:150px;
+}
+
+.search-button{
+margin-left:5px;
+height:29px;
+width:50px;
+}
+
+.filter{
+padding-top:2px;
+width:160px;
+height:29px;
+}
+
+#toplinks{
+float:left;	
+font-size:14px;
+}
+
+#toplinks a{
+text-decoration:none;
+color:#245899;
+}
+
+#toplinks a:hover{
+color:#000;
+}
+
+.create-report-button{
+height:2em;
+padding-bottom:0.2em;
+border-width:3px;
+border-style:outset;
+position:relative;
+left:27%;
+top:5px;
+}
+
+.first-name{
+width:12em;
+}
+
+.view-button{
+width:20px;
+}
+
+#share-print p{
+float:right;
+position:relative;
+left:32%;
+}
+
+#share-print p a{
+text-decoration:none;
+color:#245899;
+}
+
+#share-print p a:hover{
+color:#000;
+}
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		
+	}
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}

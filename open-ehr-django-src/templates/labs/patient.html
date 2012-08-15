@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %} open-ehrHx | Patient {% endblock %}
+{% block extra_head %}
+
+<link rel="stylesheet" href="/static/css/jquery.autocomplete.css">
+<link rel="stylesheet" href="/static/css/patientstyles.css">
+ <link rel="stylesheet" href="/static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+
+
+{% block extra_js %}
+
+    <script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>    
+    <script type="text/javascript" src="/static/js/jquery.autocomplete.js"></script>
+    <script>
+		function findValue(li) {
+	if( li == null ) return alert("No match!");
+
+	// if coming from an AJAX call, let's use the CityId as the value
+	if( !!li.extra ) var sValue = li.extra[0];
+
+	// otherwise, let's just display the value in the text box
+	else var sValue = li.selectValue;
+
+	alert("The value you selected was: " + sValue);
+}
+
+function selectItem(li) {
+	findValue(li);
+}
+</script>
+<script>
+$(document).ready(function(){
+				
+				
+				$('ul.doctabs').each(function(){
+					// For each set of tabs, we want to keep track of
+					// which tab is active and it's associated content
+					var $active, $content, $links = $(this).find('a');
+					// Use the first link as the initial active tab
+					$active = $links.first().addClass('current');
+					$content = $($active.attr('href'));
+
+					// Hide the remaining content
+					$links.not(':first').each(function () {
+						$($(this).attr('href')).hide();
+					});
+
+					// Bind the click event handler
+					$($(this)).on('click', 'a', function(e){
+						// Make the old tab inactive.
+						
+						$active.removeClass('current');
+						$content.hide();
+						$("#create-new-report").hide();
+						
+						// Update the variables with the new link and content
+						$active = $(this);
+						$content = $($(this).attr('href'));
+
+						// Make the tab active.
+						$active.addClass('current');
+						$content.show();
+
+						// Prevent the anchor's default click action
+						e.preventDefault();
+					});
+				});
+
+		$("#id_report_due_on").datepicker({ dateFormat: 'yy-mm-dd' });
+		$("#id_patient_dob").datepicker({
+			dateFormat: 'yy-mm-dd',
+			yearRange: '1911:2012',
+			changeMonth: true,
+			changeYear: true });
+		
+	   var i;
+	  for (i=1;i<=5;i++){ 
+	   $("#id_tests_list-"+String(i)).autocomplete("/labs/report_lookup");
+	    }
+	  for (i=2;i<=5;i++){
+	      $("#id_tests_list-"+String(i)).hide();
+	      $(".id_tests_list-"+String(i)).hide();
+       }
+	   var j = 2;
+	    $("#add_more_button").click(function(){
+		    $("#id_tests_list-"+String(j)).show();
+		    $(".id_tests_list-"+String(j)).show();
+		    j=j+1;
+		    if (j>5){
+			$("#add_more_button").attr("disabled",true);
+		    }
+		    }
+		);
+
+        
+			});
+
+	    function create_new_report(){
+		$("#create-new-report").show().slideDown("slow");
+		$("#tab-1").hide();
+		$("#tab-2").hide();
+		$("#tab-3").hide();
+		$("#tab-4").hide();
+		//a$("#create-new-report").show();
+	    }
+</script>
+{% endblock %}
+
+{% block container %}
+<div class="container1" style = "margin-top:30px;">  
+    {% if messages %}
+	<div class="errormessages">
+	    {% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</div>
+    {% endif %}
+    
+    <div class="row3" id = "topheader">
+		<img src = "/static/images/logo.gif" id = "logo" />
+		<div class = "headerlinks"> <!-- HEADERLINKS DIV ADDED -->
+			<div id = "toplinks">
+				Welcome, <a href = "#">{{user.first_name}} {{user.last_name}}</a> | <a href = "#">Settings</a> | <a href = "#">Help</a> | <a href = "/logout">Logout</a>
+			</div>			
+		</div> <!--HEADERLINKS DIV ENDS -->
+    </div>  <!--ROW 2 ENDS -->
+
+    <div class = "row3" id = "search-filter-share">
+		<div class = "searchbox">
+			<input type = "text" class = "searchinput"/>
+			<input type = "button" value = "Search Reports" class = "search-button"/>
+		</div> <!-- SEARCHBOX DIV ENDS -->
+		<div class = "filters">
+				<select class = "filter">
+					<option value="filter" selected = "selected">Filter by report</option>
+					<option value="blood_tests">Blood Tests</option>
+					<option value="angiographies">Angiographies</option>
+					<option value="x_rays">X Rays</option>
+				</select>
+			</div> <!-- FILTER DIV ENDS -->
+		
+			<div id = "share-print">
+				<p><a href = "#">Share</a> | <a href = "#">Print</a></p>
+			</div> <!--SHARE-PRINT ends -->
+   </div>	
+
+	<div class= "row1">
+			<div id="tabsnot">
+				<ul class="doctabs ui-tabs ui-widget">
+					<li><a href="#tab-1">Reports</a></li>
+					<li><a href="#tab-2">Pending</a></li>
+					<li><a href="#tab-3">Shared</a></li>
+					<li><a href="#tab-4">Create</a></li>
+                </ul>
+			</div> <!-- TABSNOT DIV CLOSES -->		
+		<div class = "tabs-box">			
+			<div id="tab-1">
+                {% block tab1 %}
+                    {% if rangeleni %}
+						{% for  datum,test in  accepted_reports.items %}
+							{% url open-ehr.labs.views.view_expanded test.4 as the_url %}
+							<a href = "view_expanded/{{test.3}}/{{ test.4  }}" class = "report-url">		
+								<div id = "report-fields" class="a-{{test.0}}"> <!-- WIDTH OF REPORT-FIELDS DIV IS 830PX -->
+										<div class = "report-field" id = "checkbox-width">
+											<input type="checkbox" name="report-select" class = "checkbox"/>
+										</div>
+										<div class ="report-field" id = "date-width">
+											{{ test.1 }}
+										</div>
+										<div class ="report-field" id = "med-width">
+											{{ test.2 }}
+										</div>
+										<div class ="report-field" id = "first-name-width">
+											{{ test.5 }}
+										</div>
+										<div class ="report-field" id = "view-button-width">
+											<a href="view_expanded/{{test.3}}/{{ test.4  }}"><img src = "/static/images/passwordvault.png" class = "verify-image" /></a>
+										</div>		
+								</div> <!-- REPORT-FIELDS DIV CLOSES -->
+							</a>	
+						{% endfor %}
+					{% else %}
+						No Pending Reports
+					{% endif %}
+				{% endblock %}
+			</div> <!-- TAB-1 CLOSES -->
+
+			<div id="tab-2">
+				{% if rangelenj %}
+					{% for  datum,test in pending_reports.items %}
+						{% url open-ehr.labs.views.view_expanded test.4 as the_url %}
+						<a href = "{{ the_url }}" class = "report-url">	
+							<div id = "report-fields" class="a-{{test.0}}"> <!-- WIDTH OF REPORT-FIELDS DIV IS 830PX -->
+									<div class = "report-field" id = "checkbox-width">
+										<input type="checkbox" name="report-select" class = "checkbox"/>
+									</div>
+									<div class ="report-field" id = "date-width">
+										{{ test.1 }}
+									</div>
+									<div class ="report-field" id = "med-width">
+										{{ test.2 }}
+									</div>
+									<div class ="report-field" id = "first-name-width">
+										{{ test.5 }}
+									</div>
+									<div class ="report-field" id = "view-button-width">
+										<a href="{{ the_url  }}"><img src = "/static/images/passwordvault.png" style = "height:18px;"/></a>
+									</div>
+							</div> <!-- REPORT-FIELDS DIV CLOSES -->
+						</a>
+					{% endfor %}
+				
+					{% else %}
+						No Verified Reports
+					{% endif %}
+			</div> <!-- div tabs should close here to separate links from the tab-1 and tab-2 -->
+			<div id = "tab-3" class="ui-tabs-hide">
+				{% block tab3 %}
+                    TEST
+                {% endblock %}		
+            </div><!-- TAB-3 CLOSES -->
+			<div id = "tab-4" class="ui-tabs-hide">
+                {% block tab4 %}
+                    TEST
+                {% endblock %}		
+            </div><!-- TAB-4 CLOSES -->
+            
+            <div id="create-new-report" width="100%" height="100%" style = "display:none;">
+				<form method="POST" action="/labs/add/" name="patient_info_form">
+						{% for field in patient_info_form %}
+							{{ field.errors }}							
+								<span class = {{ field.auto_id }}>{{ field.label_tag }}</span>
+							{{ field }}
+						{% endfor %}
+						<input type = "button" id="add_more_button" value="Add more">
+						<input type="submit" id="lab_registration_submit" value="Submit">				
+				</form>
+			</div> <!-- CREATE-NEW-FORM DIV CLOSES -->
+	    
+		</div> <!-- TABS-BOX DIV CLOSES-->
+	</div> <!-- row1 div closes -->
+	
+	<div class = "row2">
+		<div class = "footerwrap">
+			<div id = "info1" class = "footertext">
+				<p class = "copyright">SalusHx &copy; 2011</p>
+			</div>	<!-- DIV INFO1 ENDS -->
+		
+	  
+			<div id = "footerlinks">
+				<ul>
+					<li><a href = "#">About</a></li>
+					<li><a href = "#">Contact</a></li>
+					<li><a href = "#">Privacy Policy</a></li>
+					<li><a href = "#">Terms of Use</a></li>
+					<li><a href = "#">Careers</a></li>
+					<li><a href = "#">Help</a></li>
+				</ul>
+			</div>
+		</div>	
+			
+	</div><!-- DIV ROW2 ENDS --> 
+	
+	
+</div> <!-- container1 div closes --> 
+
+{% endblock %}

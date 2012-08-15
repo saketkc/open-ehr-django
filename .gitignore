@@ -1,6 +1,8 @@
 *.py[co]
-
+*.svn
+.svn
 # Packages
+
 *.egg
 *.egg-info
 dist

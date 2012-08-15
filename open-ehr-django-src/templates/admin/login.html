@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% load url from future %}
+
+
+
+
+
+{% block nav-global %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
+<p class="errornote">
+{% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors or form.this_is_the_login_form.errors %}
+{% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+     <div class="loginform">
+    	<div class="title"> <img src="/static/images/logo.jpg" width="112" height="35" /></div>
+        <div class="body">
+   
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  
+    {% if not form.this_is_the_login_form.errors %}{{ form.username.errors }}{% endif %}
+    <label class="log-lab">Username</label>
+    <input name="username" type="text" class="login-input-user" id="textfield" placeholder="Admin"/>
+  
+    {% if not form.this_is_the_login_form.errors %}{{ form.password.errors }}{% endif %}
+    <label class="log-lab">Password</label>
+    <input name="password" type="password" class="login-input-pass" id="textfield" placeholder="Password"/>
+            
+    <input type="hidden" name="this_is_the_login_form" value="1" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
+  </div>
+  {% endif %}
+  
+    <input type="submit" name="button" id="button" value="Login" class="button"/>
+  
+  
+</form>
+  </div>
+  </div>
+
+<script type="text/javascript">
+document.getElementById('id_username').focus()
+</script>
+</div>
+{% endblock %}

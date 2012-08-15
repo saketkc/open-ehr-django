@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>{{lab_name}}  Users</h2>
+    <a href="/accounts/add/">Add new user</a>
+    
+    <ul>
+        {% for publisher in all_users %}
+            <li>{{ publisher.user }}</li>
+        {% endfor %}
+    </ul>
+    
+{% endblock %}

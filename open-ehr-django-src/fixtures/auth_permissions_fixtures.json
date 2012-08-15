@@ -1,0 +1,73 @@
+[
+   {
+    "model": "auth.permissions",
+    "pk": 25,
+    "fields": {
+      "name": "Can look at patients reports",
+      "content_type_id" : "9",
+      "codename":"can_view_reports"
+      
+      
+    }
+  },
+  
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "lab_super_users"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "lab_doctors"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 4,
+    "fields": {
+      "name": "lab_technicians"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 5,
+    "fields": {
+      "name": "lab_receptionists"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 6,
+    "fields": {
+      "name": "lab_patients_unregistered"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 7,
+    "fields": {
+      "name": "lab_patients_registered"
+      
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 8,
+    "fields": {
+      "name": "outside_doctors"
+      
+    }
+  }
+
+  
+]
+

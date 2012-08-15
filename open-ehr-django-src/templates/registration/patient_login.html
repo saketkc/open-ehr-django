@@ -1,0 +1,140 @@
+{% extends "registration/labs_login.html" %}
+{% block title %} open-ehrHx | Login{% endblock %}
+{% block css %}{% endblock %}
+{% block extra_head %}  
+  <script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script> 
+    <script>
+	$(document).ready((function() {
+	   // $("#tabs").tabs();
+	    $('#tabs div').hide(); // Hide all divs
+$('#tabs div:first').show(); // Show the first div
+$('#tabs ul li:first').addClass('current'); // Set the class of the first link to active
+$('#tabs ul li a').click(function(){ //When any link is clicked
+if ($(this).attr("href")=="#tab-1")
+{
+    $('#info').html("<p class = 'welcometext'>Welcome to SalusHx!</p><ul><li class = 'textrows'><img src = '/static/images/onebit.png' class = 'iconimg' align = 'middle'/>We at SalusHx understand the importance of preserving your medical records.</li><li class = 'textrows'><img src = '/static/images/collaboration.png' class = 'iconimg' align = 'middle'/>Easily access your medical records and share with doctors and<br /> family.</li><li class = 'textrows'><img src = '/static/images/passwordvault.png' class = 'iconimg' align = 'middle' />All your records are saved using the highest level of encryption. <br />Your confidentiality is so important that we built SalusHx as if we  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;were building a bank vault.</li><p class = 'centeredtext'>Go ahead and use SalusHx with complete peace of mind.<br /> Organizing your medical records was never so easy.</p>");
+}
+else{
+        $("#tab-2").removeClass("ui-tabs-hide");
+    $('#info').html("<p class = 'welcometext'>Welcome to SalusHx!</p><ul><p class = 'signup-start'>Signing for Salushx is a a simple 3 step process.</p><li class = 'signuptext'>Enter your information in the form at the right. Your personal details are<br /> safe with us.</li><li class = 'signuptext'>We will send a pin code to your mobile number. Verify your mobile number<br /> and  email address by entering the pin code where required.</li><li class = 'signuptext'>Voila! You are ready to use Salushx. Click on the question mark at any<br /> point for more information or help.</li>");
+}
+
+$('#tabs ul li').removeClass('current'); // Remove active class from all links
+$(this).parent().addClass('current'); //Set clicked link class to active
+var currentTab = $(this).attr('href'); // Set variable currentTab to value of href attribute of clicked link
+$('#tabs div').hide(); // Hide all divs
+$(currentTab).show(); // Show div with id equal to variable currentTab
+return false;
+});
+$("#id_date_of_birth").datepicker({ 
+			dateFormat: 'yy-mm-dd',
+			yearRange: '1911:2012',
+			changeMonth: true,
+			changeYear: true });
+$("#id_dateofbirth").datepicker({
+			dateFormat: 'yy-mm-dd',
+			yearRange: '1911:2012',
+			changeMonth: true,
+			changeYear: true });
+	}));
+    </script>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/jquery-ui-1.8.16.custom.css">
+
+{% endblock %}
+{% block header %} {% endblock %}
+{% block navigation %} {% endblock %}
+
+{% block content %}
+<div class="container1" style = "margin-top:30px;">    
+    <div class="row2" id = "topheader">
+		<div id = "logo">	
+			<img src = "/static/images/logo.gif" />
+		</div>
+	</div>  <!-- DIV TOPEHADER ROW2 ENDS -->
+	
+    <div class = "row1">
+		<div id = "info">
+			{% block descriptions %}
+			<p class = "welcometext">Welcome to SalusHx!</p>
+			<ul>
+			<li class = "textrows"><img src = "/static/images/onebit.png" class = "iconimg" align = "middle"/>We at SalusHx understand the importance of preserving your medical records.</li>
+			<li class = "textrows"><img src = "/static/images/collaboration.png" class = "iconimg" align = "middle"/>Easily access your medical records and share with doctors and<br /> family.</li>
+			<li class = "textrows"><img src = "/static/images/passwordvault.png" class = "iconimg" align = "middle" />All your records are saved using the highest level of encryption. <br />Your confidentiality is so important that we built SalusHx as if we  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;were building a bank vault.</li>
+				<p class = "centeredtext">Go ahead and use SalusHx with complete peace of mind.<br /> Organizing your medical records was never so easy.</p>
+		{% endblock %}
+		</div>	<!-- DIV INFO ENDS -->
+
+
+	    <div class="ui-tabs ui-widget"  id="tabs">
+			{% block tabs %}	
+			<ul class="ultabs">
+				<li><a href="#tab-1">Log In</a></li>
+				<li><a href="#tab-2">Sign Up</a></li>
+			</ul>
+			{% endblock %}
+			
+			{% block tab-divs %}		
+				<div id = "tab-1">
+					<form method="POST" action="/accounts/login/" name="login_form">
+						<fieldset>
+							{{login_form.as_p}}
+							<input type="submit" id="lab_login_submit" value="Log In">
+						</fieldset>
+					</form>
+					{% if messages %}
+						{% for message in messages %}
+							<p{% if message.tags %} class="{{ message.tags }} errormessages"{% endif %}>{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+					<p id = "pwdlinks">
+						<a href = "/forgotpassword">Forgot Password?</a><br />
+						<a href = "#">Having trouble logging in?</a><br/>
+						<a href = "/labs">Labs Login</a>
+					</p>
+					
+					<span id = "retr1eive">
+						<p style = "text-align:center; color:#245899; margin-left:-30px;">Don't want to register? No problem, simply retrieve<br /> your medical records</p> 
+						<form method ="post" action="/pinlogin/">
+						<fieldset>
+							{{pin_login_form.as_p}}
+							<input type="submit"  value="Log In" id = "lab_login_submit">
+						</fieldset>
+						</form>
+					</span>				
+				</div> <!-- DIV TAB-1 ENDS -->
+					
+				<div id="tab-2" class="ui-tabs-hide">
+					<form method="POST" action="/register/" name="registration_form">
+						{{ patient_registration_form.as_p}}
+						<p id = "agree-to-terms"><input type="checkbox" name="agree-to-terms" id = "agree-checkbox"/>I acknowledge that I have read and agree to terms of the Licence Agreement and Privacy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Policy.</p>
+						<input type="submit" value="Sign up" id = "lab_login_submit">
+					</form>
+				</div> <!-- DIV TAB-2 ENDS -->
+			{% endblock %}
+		</div> <!-- DIV TABS ENDS -->	
+	</div><!-- DIV ROW1 ENDS --> 
+	
+	<div class = "row2">
+		<div class = "footerwrap">
+			<div id = "info1" class = "footertext">
+				<p class = "copyright">SalusHx &copy; 2011</p>
+			</div>	<!-- DIV INFO1 ENDS -->
+		
+				<ul>
+					<li><a href = "#">About</a></li>
+					<li><a href = "#">Contact</a></li>
+					<li><a href = "#">Privacy Policy</a></li>
+					<li><a href = "#">Terms of Use</a></li>
+					<li><a href = "#">Careers</a></li>
+					<li><a href = "#">Help</a></li>
+				</ul>
+	
+		</div>	
+			
+	</div><!-- DIV ROW3 ENDS --> 
+	
+</div><!-- DIV CONTAINER1 ENDS -->
+
+{% endblock %}

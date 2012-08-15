@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} SalusHx|Register{% endblock %}
+{% block extra_head %}
+   <link rel="stylesheet" href="/static/css/style.css">
+   <link rel="stylesheet" href="/static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+{% block content %}
+    <h2>Add new Users</h2>
+    <a href="/accounts/add">Add new user</a>
+    {% if messages %}
+<div class="errormessages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</div>
+{% endif %}
+    <div id ="user_creation_form">
+    
+    <form method="POST" action="/accounts/add/" name="registration_form">
+					
+						{% for field in registration_form %}
+							<div id = "registration_errors">
+								{{ field.errors }}							
+							</div>
+							<div id="registration_labels">
+								{{ field.label_tag }}
+							</div>
+							<div id="registration_fields">
+								{{ field }}
+							</div>
+						{% endfor %}
+						<input type="submit" id="registration_submit" value="Submit">
+						
+					</form>
+    </div>
+    
+{% endblock %}

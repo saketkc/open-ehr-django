@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block title %} SalusHx | Login{% endblock %}
+{% block css %}{% endblock %}
+{% block extra_head %}
+  
+  <link rel="stylesheet" href="/static/css/1140.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/tabs.css">
+  <link rel="stylesheet" href="/static/css/jquery-ui-1.8.16.custom.css">
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="/static/js/jquery-1.6.2.min.js"></script>
+  <script type="text/javascript" src="/static/js/jquery-ui-1.8.16.custom.min.js"></script>
+    <script>
+	$(document).ready((function() {
+	   // $("#tabs").tabs();
+	    $('#tabs div').hide(); // Hide all divs
+	    $('#tabs div:first').show(); // Show the first div
+	    $('#tabs ul li:first').addClass('current'); // Set the class of the first link to active
+	    $('#tabs ul li a').click(function(){ //When any link is clicked
+	    $('#tabs ul li').removeClass('current'); // Remove active class from all links
+	    $(this).parent().addClass('current'); //Set clicked link class to active
+	    var currentTab = $(this).attr('href'); // Set variable currentTab to value of href attribute of clicked link
+	    $('#tabs div').hide(); // Hide all divs
+	    $(currentTab).show(); // Show div with id equal to variable currentTab
+	    return false;
+	    });
+
+	}));
+    </script>
+{% endblock %}
+{% block header %} {% endblock %}
+{% block navigation %} {% endblock %}
+{% block footer %} {% endblock %}
+
+
+{% block content %}
+<div class="container" style = "margin-top:30px;">
+    {% if messages %}
+	<div class="errormessages">
+	    {% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</div>
+    {% endif %}
+    <div class="row" id = "topheader">
+	<div class = "threecol">
+	    <img src = "/static/images/logo.gif" />
+	</div>
+	<div class = "ninecol last" style = "z-index:-3;"></div>
+    </div>  
+    <div class = "row" style = "margin-top:20px;">
+    {%block open-ehr_description %}
+	<div class = "sevencol">
+	    <h3 style = "font-family:Arial,sans-serif; margin-bottom:20px;">Welcome to SalusHx!</h3>
+	    <p class = "textrows"><img src = "/static/images/onebit.png" class = "iconimg" align = "middle"/>We at SalusHx understand the importance of preserving your medical<br /> records.</p>
+	    <p class = "textrows"><img src = "/static/images/collaboration.png" class = "iconimg" align = "middle"/>Easily access your medical records and share with doctors and<br /> family.</p>
+	    <p class = "textrows"><img src = "/static/images/passwordvault.png" class = "iconimg" align = "middle" />All your records are saved using the highest level of encryption. <br />Your confidentiality is so important that we built SalusHx as if we were<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;building a bank vault.</p>
+		<div class = "centertext">
+			<p class = "centeredtext">Go ahead and use SalusHx with complete peace of mind.<br /> Organizing your medical records was never so easy.</p>
+		</div>
+	</div>
+    {% endblock %}
+	<div class = "fivecol last">
+    {% block tabs %}
+	    <div id="tabs">
+		<ul class="tabs">
+		    <li><a href="#tab-1">Log In</a></li>
+		   
+		</ul>
+			
+				<div id = "tab-1">
+					<form method="POST" action="/accounts/login/" name="login_form">
+						<fieldset>
+							{{login_form.as_p}}
+							<input type="submit" id="lab_login_submit" value="Log In">
+						</fieldset>
+					</form>
+					
+					<p id = "pwdlinks">
+						<a href = "/forgotpassword">Forgot Password?</a><br />
+						<a href = "#">Having trouble logging in?</a>
+						<a href = "/">Labs Login </a><br />
+					</p>
+
+					
+					<!-- <p style = "text-align:center; color:#245899; margin-left:-3.6em;">Don't want to register? No problem, simply retrieve<br /> your medical records</p> -->
+									
+				</div>
+					
+			<!--</div>--> <!--change here-->
+ 	    </div>
+    {%endblock %}
+	</div>
+    </div> <!-- row ends here -->
+    
+    <div class = "row" id = "footer-row">
+		<div class = "twocol">
+			SalusHx &copy; 2011
+		</div>
+		
+		<div class = "fivecol">
+		</div>
+		
+		<div class = "fivecol last">
+			<span id = "footerlinks">
+				<ul>
+					<li><a href = "#">About</a></li>
+					<li><a href = "#">Contact</a></li>
+					<li><a href = "#">Privacy Policy</a></li>
+					<li><a href = "#">Terms of Use</a></li>
+					<li><a href = "#">Careers</a></li>
+					<li><a href = "#">Help</a></li>
+				</ul>
+			</span>
+		</div>
+	</div>
+</div>
+    
+{% endblock %}
