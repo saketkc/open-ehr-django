@@ -1,0 +1,23 @@
+Author: Saket Choudhary
+Copyright (C) 2012 Saket Choudhary.
+
+If the license this software is distributed under is not suitable
+for your purposes, you may contact the copyright holder through saketkc@gmail.com
+    to discuss different licensing
+terms.
+
+This file is part of  https://github.com/saketkc/open-ehr-django
+
+open-ehr is free software: you can
+redistribute it and/or modify it under the terms of the GNU Lesser
+General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+open-ehr-django is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with open-ehr-django.
+If not, see <http://www.gnu.org/licenses/>.
